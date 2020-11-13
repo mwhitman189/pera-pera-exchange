@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
+
+const UserPlate = styled.div`
+    background-color: ${({ theme }) => theme.mainColor};
+`
 
 class UserList extends Component {
     constructor(props) {
@@ -31,7 +36,7 @@ class UserList extends Component {
         return (
             <div className="user-list">
                 {this.state.users.map(user => {
-                    return <div className="user-plate" key={user.username}>{user.username}</div>
+                    return <UserPlate className="user-plate" key={user.username}>{user.username}</UserPlate>
                 })}
             </div>
         )
