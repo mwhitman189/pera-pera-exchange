@@ -23,7 +23,6 @@ exports.users_sign_up = (req, res, next) => {
                         })
                     } else {
                         const user = new User({
-                            _id: new mongoose.Types.ObjectId,
                             username: req.body.username,
                             email: req.body.email,
                             nativeLanguage: req.body.nativeLanguage,

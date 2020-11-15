@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const sentenceSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     languagePoint: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'LanguagePoint',
