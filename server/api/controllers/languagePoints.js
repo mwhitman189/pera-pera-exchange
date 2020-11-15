@@ -17,7 +17,7 @@ exports.languagePoints_get_all = (req, res, next) => {
                         languagePoint: languagePoint,
                         request: {
                             type: 'GET',
-                            url: `${LANGUAGE_POINTS_URL}${_id}`
+                            url: LANGUAGE_POINTS_URL + _id
                         }
                     }
                 })
@@ -32,22 +32,35 @@ exports.languagePoints_get_all = (req, res, next) => {
 exports.languagePoints_create = (req, res, next) => {
     const languagePoint = new Product({
         _id: new mongoose.Types.ObjectId,
-        languagePoint: req.body.languagePoint
+        languagePoint: req.body.languagePoint,
+        japaneseName: req.body.japaneseName,
+        englishExample: req.body.englishExample,
+        japaneseExample: req.body.japaneseExample,
+        user: req.userData.userId
     })
-    if (req.file !== undefined) {
-        languagePoint.languagePointImage = req.file.path
-    }
+
     languagePoint.save()
-        .then(({ _id, languagePoint, price }) => {
+        .then(({
+            _id,
+            languagePoint,
+            japaneseName,
+            englishExample,
+            japaneseExample,
+            user
+        }) => {
             return res.status(201).json({
-                msg: "Product successfully added",
+                msg: "Language point successfully added",
                 languagePoint: {
                     _id: _id,
                     languagePoint: languagePoint,
+                    japaneseName: japaneseName,
+                    englishExample: englishExample,
+                    japaneseExample: japaneseExample,
+                    user: user
                 },
                 request: {
                     type: 'GET',
-                    url: `${LANGUAGE_POINTS_URL}${_id}`
+                    url: LANGUAGE_POINTS_URL + _id
                 }
             })
         }).catch(err => {
@@ -95,7 +108,7 @@ exports.languagePoints_edit = (req, res, next) => {
                     msg: "Product updated",
                     request: {
                         type: 'GET',
-                        url: `${LANGUAGE_POINTS_URL}${id}`
+                        url: LANGUAGE_POINTS_URL + id
                     }
                 })
             }).catch(err => {

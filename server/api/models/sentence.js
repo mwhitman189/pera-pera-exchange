@@ -15,6 +15,15 @@ const sentenceSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    winningCategory: {
+        type: String,
+        required: false,
+        default: null
+    },
+    language: {
+        type: String,
+        required: true
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

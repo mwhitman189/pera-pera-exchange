@@ -35,20 +35,19 @@ exports.sentences_get_all = (req, res, next) => {
 exports.sentences_create_sentence = (req, res, next) => {
     LanguagePoint.findById(req.body.languagePointId)
         .then(languagePoint => {
-            console.log(languagePoint)
             if (!languagePoint) {
                 return res.status(404).json({
-                    msg: "LanguagePoint was not found",
-
+                    msg: "LanguagePoint was not found"
                 })
             }
             const sentence = new Sentence({
                 _id: mongoose.Types.ObjectId(),
                 languagePoint: req.body.languagePointId,
-                voteCount: req.body.voteCount,
+                sentence: req.body.sentence,
+                language: req.userData.nativeLanguage,
                 user: req.userData.userId
             })
-            console.log(sentence)
+
             sentence.save()
                 .then(result => {
                     res.status(201).json({
@@ -58,6 +57,7 @@ exports.sentences_create_sentence = (req, res, next) => {
                             createdSentence: {
                                 _id: result._id,
                                 languagePoint: result.languagePoint,
+                                sentence: result.sentence,
                                 voteCount: result.voteCount,
                                 user: result.user
                             },

@@ -10,13 +10,11 @@ exports.users_sign_up = (req, res, next) => {
     User.find({ email: req.body.email })
         .exec()
         .then(user => {
-            console.log(user)
             if (user.length > 0) {
                 return res.status(422).json({
                     message: "Email already exists"
                 })
             } else {
-                console.log(user)
                 // Hash the password with specified number of hashing rounds (e.g. 10)
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
@@ -26,18 +24,18 @@ exports.users_sign_up = (req, res, next) => {
                     } else {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId,
+                            username: req.body.username,
                             email: req.body.email,
+                            nativeLanguage: req.body.nativeLanguage,
                             password: hash
                         })
                         user.save()
                             .then(result => {
-                                console.log(result)
                                 res.status(201).json({
                                     message: "User created!"
                                 })
                             })
                             .catch(err => {
-                                console.log(err)
                                 res.status(500).json({
                                     error: err
                                 })
@@ -54,7 +52,6 @@ exports.users_log_in = (req, res, next) => {
     User.findOne({ email: email })
         .exec()
         .then(user => {
-            console.log(user)
             if (user.length < 1) {
                 return res.status(401).json({
                     message: "Authentication failed"
@@ -70,7 +67,9 @@ exports.users_log_in = (req, res, next) => {
                 }
                 if (result) {
                     const accessToken = jwt.sign({
+                        username: user.username,
                         email: user.email,
+                        nativeLanguage: user.nativeLanguage,
                         userId: user._id
                     }, process.env.JWT_KEY,
                         {
@@ -78,7 +77,9 @@ exports.users_log_in = (req, res, next) => {
                         })
 
                     const refreshToken = jwt.sign({
+                        username: user.username,
                         email: user.email,
+                        nativeLanguage: user.nativeLanguage,
                         userId: user._id
                     }, process.env.JWT_REFRESH_KEY)
                     refreshTokens.push(refreshToken)
@@ -125,7 +126,9 @@ exports.users_refresh_token = (req, res, next) => {
         }
 
         const accessToken = jwt.sign({
+            username: user.username,
             email: user.email,
+            nativeLanguage: user.nativeLanguage,
             userId: user._id
         }, process.env.JWT_KEY,
             {
@@ -163,10 +166,9 @@ exports.users_delete_token = (req, res, next) => {
 
 exports.users_get_all = (req, res, next) => {
     User.find()
-        .select('-__v')
+        .select('-__v -password')
         .exec()
         .then(user => {
-            console.log(user)
             res.status(200).json({
                 user: user
             })
