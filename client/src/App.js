@@ -8,7 +8,8 @@ const theme = {
   mainColor: "#33c9ff",
   highlightColor: "#fff",
 
-  fontSize: "16px"
+  fontSize: "16px",
+  fontFamily: "Roboto"
 }
 
 function App() {
