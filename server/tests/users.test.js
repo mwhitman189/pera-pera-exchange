@@ -29,12 +29,15 @@ const userData = [
 
 describe('User Model Test', () => {
     beforeAll(async () => {
-        await mongoose.connect(global.__MONGO_URI__, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
-            if (err) {
-                console.error(err)
-                process.exit(1)
-            }
-        })
+        await mongoose.connect(
+            global.__MONGO_URI__,
+            { useNewUrlParser: true, useCreateIndex: true },
+            (err) => {
+                if (err) {
+                    console.error(err)
+                    process.exit(1)
+                }
+            })
     })
 
     afterAll(async () => {
@@ -58,7 +61,7 @@ describe('User Model Test', () => {
         let err
         try {
             const savedUser = await userWithoutRequiredField.save()
-            error = savedUser
+            err = savedUser
         } catch (error) {
             err = error
         }
@@ -72,7 +75,7 @@ describe('User Model Test', () => {
         let err
         try {
             const savedUser = await userWithInvalidEmail.save()
-            error = savedUser
+            err = savedUser
         } catch (error) {
             err = error
         }
@@ -86,7 +89,7 @@ describe('User Model Test', () => {
         let err
         try {
             const savedUser = await userWithInvalidPasswordLength.save()
-            error = savedUser
+            err = savedUser
         } catch (error) {
             err = error
         }
