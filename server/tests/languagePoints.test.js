@@ -51,7 +51,7 @@ describe('LanguagePoint Model Test', () => {
 
         let err
         try {
-            const savedValidLanguagePoint = await validLanguagePoint.save()
+            await validLanguagePoint.save()
             const savedDuplicateLanguagePoint = await duplicateLanguagePoint.save()
 
             err = savedDuplicateLanguagePoint
