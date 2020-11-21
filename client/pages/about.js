@@ -7,10 +7,10 @@ export default function AboutPage() {
     return (
         <>
             <Head>
-                <title>Pera Pera Exchange | About</title>
+                <title>How it works | Pera Pera Exchange</title>
             </Head>
 
-            <h1>About Pera Pera Exchange</h1>
+            <h1>Level up your language skills with Pera Pera</h1>
             <Link href="/"><a>Home</a></Link>
         </>
     )

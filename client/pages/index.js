@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Pera Pera Exchange | Home</title>
+        <title>Pera Pera Exchange | Level up your language ability!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -21,17 +21,6 @@ export default function Home() {
           <Link href="/users/signup"><a className="link">creating a profile</a></Link>
         </p>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
