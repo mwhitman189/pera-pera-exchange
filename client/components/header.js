@@ -1,44 +1,44 @@
 import BREAKPOINTS from '../styles/breakpoints'
 import Link from 'next/link'
+import theme from '../styles/theme'
+import { Component } from 'react'
 
 
-export default function Header({ menuIsOpen }) {
-    return (
-        <>
-            <header className="header">
-                <nav>
-                    <div className="logo">
-                        <Link href="/">
-                            <a className="nav-btn">SVG_LOGO_PLACEHOLDER</a>
-                        </Link>
-                    </div>
-                    <div>
-                        <Link href="/signup">
-                            <a className="nav-btn">Sign up</a>
-                        </Link>
-                    </div>
-                    <button className="menu-btn">SVG_MENU_ICON_PLACEHOLDER</button>
+export default class Header extends Component {
 
-                    <div className="hamburger-menu">
-                        <span>
-                            {menuIsOpen === true && (
-                                <div className="sign-up-btn">
-                                    <Link href="/signup">
-                                        <a>Sign up</a>
-                                    </Link>
-                                </div>
-                            )}
-                        </span>
-                    </div>
-                </nav>
-            </header>
+    render() {
+        return (
+            <>
+                <header className="header">
+                    <nav>
+                        <div className="logo">
+                            <Link href="/">
+                                <a className="nav-btn">ロゴ</a>
+                            </Link>
+                        </div>
+                        <div className="btn-group">
+                            <div className="login-btn">
+                                <Link href="/users/login">
+                                    <a className="nav-btn">Log in</a>
+                                </Link>
+                            </div>
+                            <div className="signup-btn">
+                                <Link href="/users/signup">
+                                    <a className="nav-btn">Sign up</a>
+                                </Link>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
 
-            <style jsx>{`
+                <style jsx>{`
                 .header {
-                    background: #fafafa;
+                    color: ${theme.ltColors.text};
+                    background: ${theme.ltColors.background};
                     width: auto;
                     height: 62px;
-                    padding: 0 10px;
+                    padding: 0 36px;
+                    border-bottom: 1px solid ${theme.ltColors.border};
                 }
 
                 nav {
@@ -57,8 +57,15 @@ export default function Header({ menuIsOpen }) {
                     display: flex;
                 }
 
-                .hamburger-menu {
-                    display: inline-block;
+                .btn-group {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 120px;
+                }
+
+                a {
+                    font-weight: bold;
                 }
 
                 @media screen and (min-width: ${BREAKPOINTS.md}) {
@@ -71,7 +78,8 @@ export default function Header({ menuIsOpen }) {
                     }
                 }
             `}
-            </style>
-        </>
-    )
+                </style>
+            </>
+        )
+    }
 }

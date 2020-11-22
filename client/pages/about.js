@@ -3,7 +3,7 @@ import Link from 'next/link'
 import theme from '../styles/theme'
 
 
-export default function AboutPage() {
+export default function About() {
     return (
         <>
             <Head>
