@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
 
 const languagePointRoutes = require('./api/routes/languagePoints')
@@ -24,6 +25,8 @@ app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 // Allow for extraction and parsing of json data
 app.use(bodyParser.json())
+
+app.use(cookieParser())
 
 // Handle CORS (Cross Origin Resource Sharing)
 app.use((req, res, next) => {

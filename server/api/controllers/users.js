@@ -81,12 +81,18 @@ exports.users_log_in = (req, res, next) => {
                         nativeLanguage: user.nativeLanguage,
                         userId: user._id
                     }, process.env.JWT_REFRESH_KEY)
+
                     refreshTokens.push(refreshToken)
+
+                    res.cookie('refreshToken', refreshToken, {
+                        expires: new Date(Date.now() + 360000000),
+                        secure: false, // set to true if your using https
+                        httpOnly: true,
+                    })
 
                     return res.status(200).json({
                         message: "Authentication successful!",
                         token: accessToken,
-                        refreshToken: refreshToken
                     })
                 }
                 res.status(401).json({
@@ -103,7 +109,7 @@ exports.users_log_in = (req, res, next) => {
 }
 
 exports.users_refresh_token = (req, res, next) => {
-    const { refreshToken } = req.body
+    const refreshToken = req.cookies.refreshToken
 
     if (!refreshToken) {
         return res.status(401).json({
@@ -133,8 +139,24 @@ exports.users_refresh_token = (req, res, next) => {
             {
                 expiresIn: '1h'
             })
+
+        const refreshToken = jwt.sign({
+            username: user.username,
+            email: user.email,
+            nativeLanguage: user.nativeLanguage,
+            userId: user._id
+        }, process.env.JWT_REFRESH_KEY)
+
+        refreshTokens.push(refreshToken)
+
+        res.cookie('refreshToken', refreshToken, {
+            expires: new Date(Date.now() + 360000000),
+            secure: false, // set to true if your using https
+            httpOnly: true,
+        })
+
         res.status(200).json({
-            accessToken
+            token: accessToken
         })
     })
 }
