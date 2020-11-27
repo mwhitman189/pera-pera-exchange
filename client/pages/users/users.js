@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import theme from '../styles/theme'
-import UserList from '../components/userList'
+import theme from '../../styles/theme'
+import UserList from '../../components/userList'
 
 
-export default function Profile(props) {
+function Users(props) {
 
     return (
         <>
@@ -16,3 +16,4 @@ export default function Profile(props) {
         </>
     )
 }
+export default Users

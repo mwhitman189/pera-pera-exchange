@@ -7,7 +7,7 @@ const theme = {
         text: '#333',
         background: '#fff',
         link: '#1eaaf1',
-        linkHover: '#0d8ecf',
+        linkHover: '#47c1ff',
         border: '#ddd',
         warning: '#fff3cd',
         success: '#d4edda'
@@ -20,6 +20,9 @@ const theme = {
         border: '#8a8888',
         warning: '#fff3cd',
         success: '#d4edda'
+    },
+    shadows: {
+        subtle: '0px 3px 6px rgba(0,0,0,0.3)'
     }
 }
 
