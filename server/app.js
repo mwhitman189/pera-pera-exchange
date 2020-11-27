@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
+
 
 const languagePointRoutes = require('./api/routes/languagePoints')
 const sentenceRoutes = require('./api/routes/sentences')
@@ -25,25 +27,11 @@ app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({ extended: false }))
 // Allow for extraction and parsing of json data
 app.use(bodyParser.json())
-
 app.use(cookieParser())
-
-// Handle CORS (Cross Origin Resource Sharing)
-app.use((req, res, next) => {
-    // Using Postman or Curl, etc., data can be accessed, so '*' is not much
-    // less secure than a limited access schema
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    )
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
-        return res.status(200).json({})
-    }
-    // Would block incoming request, so must call 'next()'
-    next()
-})
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 
 app.use('/languagePoints', languagePointRoutes)
 app.use('/sentences', sentenceRoutes)

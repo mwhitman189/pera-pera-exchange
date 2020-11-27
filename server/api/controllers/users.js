@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
 
+const TOKEN_DURATION = 60 * 60
 const refreshTokens = []
 
 exports.users_sign_up = (req, res, next) => {
@@ -69,16 +70,14 @@ exports.users_log_in = (req, res, next) => {
                         username: user.username,
                         email: user.email,
                         nativeLanguage: user.nativeLanguage,
-                        userId: user._id
+                        userId: user._id,
+                        expiresIn: TOKEN_DURATION
                     }, process.env.JWT_KEY,
                         {
-                            expiresIn: '1h'
+                            expiresIn: TOKEN_DURATION
                         })
 
                     const refreshToken = jwt.sign({
-                        username: user.username,
-                        email: user.email,
-                        nativeLanguage: user.nativeLanguage,
                         userId: user._id
                     }, process.env.JWT_REFRESH_KEY)
 
@@ -92,7 +91,7 @@ exports.users_log_in = (req, res, next) => {
 
                     return res.status(200).json({
                         message: "Authentication successful!",
-                        token: accessToken,
+                        accessToken: accessToken,
                     })
                 }
                 res.status(401).json({
@@ -109,7 +108,7 @@ exports.users_log_in = (req, res, next) => {
 }
 
 exports.users_refresh_token = (req, res, next) => {
-    const refreshToken = req.cookies.refreshToken
+    const refreshToken = req.cookies.refreshToken || ''
 
     if (!refreshToken) {
         return res.status(401).json({
@@ -134,7 +133,8 @@ exports.users_refresh_token = (req, res, next) => {
             username: user.username,
             email: user.email,
             nativeLanguage: user.nativeLanguage,
-            userId: user._id
+            userId: user._id,
+            expiresIn: TOKEN_DURATION
         }, process.env.JWT_KEY,
             {
                 expiresIn: '1h'
@@ -144,12 +144,13 @@ exports.users_refresh_token = (req, res, next) => {
             username: user.username,
             email: user.email,
             nativeLanguage: user.nativeLanguage,
-            userId: user._id
+            userId: user._id,
         }, process.env.JWT_REFRESH_KEY)
 
         refreshTokens.push(refreshToken)
 
         res.cookie('refreshToken', refreshToken, {
+            domain: 'http://localhost:3000',
             expires: new Date(Date.now() + 360000000),
             secure: false, // set to true if your using https
             httpOnly: true,

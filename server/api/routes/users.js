@@ -12,7 +12,8 @@ router.post('/signup', UsersController.users_sign_up)
 router.post('/login', UsersController.users_log_in)
 
 // Add endpoint for refreshing the accessToken
-router.post('/token', checkAuth, UsersController.users_refresh_token)
+// router.post('/token', checkAuth, UsersController.users_refresh_token)
+router.get('/token', UsersController.users_refresh_token)
 
 router.post('/logout', UsersController.users_log_out)
 

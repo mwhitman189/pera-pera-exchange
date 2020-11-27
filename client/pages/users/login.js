@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import theme from '../../styles/theme'
+import checkIfExpired from '../../utils/countdown'
+import jwt_decode from "jwt-decode"
 
 
 class Login extends Component {
@@ -31,12 +32,18 @@ class Login extends Component {
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({ email: this.state.email, password: this.state.password })
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            })
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                return this.setState({ authToken: data.token, refreshToken: data.refreshToken })
+                const decodedToken = jwt_decode(data.accessToken)
+                checkIfExpired(decodedToken.expiresIn)
+                return this.setState({
+                    authToken: data.accessToken,
+                })
             })
             .catch(err => {
                 console.log(err)
