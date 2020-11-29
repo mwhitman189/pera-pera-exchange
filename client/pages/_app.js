@@ -21,7 +21,7 @@ function App({ Component, pageProps }) {
           color: ${pageProps.isDarkTheme ? theme.dtColors.linkHover : theme.ltColors.linkHover}
         }
 
-        .bold {
+        .username {
           font-weight: bold;
         }
       `}
