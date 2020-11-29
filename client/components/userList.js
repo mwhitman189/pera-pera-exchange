@@ -15,7 +15,6 @@ class UserList extends Component {
         fetch('http://localhost:9000/users')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({
                     users: data.users
                 })
