@@ -6,7 +6,8 @@ class UserList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: []
+            users: [],
+            error: ""
         }
     }
 
@@ -16,14 +17,7 @@ class UserList extends Component {
             .then(data => {
                 console.log(data)
                 this.setState({
-                    users: data.user.map(user => {
-                        return {
-                            username: user.username,
-                            nativeLanguage: user.nativeLanguage,
-                            points: user.points,
-                            rank: user.rank
-                        }
-                    })
+                    users: data.users
                 })
             })
             .catch(err => {
@@ -34,16 +28,16 @@ class UserList extends Component {
     render() {
         return (
             <div className="user-list">
-                {this.state.users.map(user => {
+                {this.state.users.map(({username}) => {
                     return (
                         <>
-                            <div className="user-plate" key={user.username}>
-                                <div className="user-name bold">{user.username}</div>
+                            <div className="user-plate" key={username}>
+                                <div className="user-name username">{username}</div>
                             </div>
                             <style jsx>{`
                                 .user-plate {
                                     color: ${theme.dtColors.text};
-                                    background: ${theme.ltColors.link};
+                                    background-color: ${theme.ltColors.link};
                                     min-height: 40px;
                                     padding: 10px;
                                     border-radius: 5px;
@@ -51,7 +45,7 @@ class UserList extends Component {
                                 }
 
                                 .user-plate:hover {
-                                    background: ${theme.ltColors.linkHover};
+                                    background-color: ${theme.ltColors.linkHover};
                                     box-shadow: ${theme.shadows.subtle};
                                 }
                             `}</style>
