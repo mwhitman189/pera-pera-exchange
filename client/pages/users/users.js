@@ -3,8 +3,7 @@ import theme from '../../styles/theme'
 import UserList from '../../components/userList'
 
 
-function Users(props) {
-
+function Users() {
     return (
         <>
             <Head>
