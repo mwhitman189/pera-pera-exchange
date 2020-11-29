@@ -20,6 +20,10 @@ function App({ Component, pageProps }) {
         a:hover {
           color: ${pageProps.isDarkTheme ? theme.dtColors.linkHover : theme.ltColors.linkHover}
         }
+
+        .username {
+          font-weight: bold;
+        }
       `}
       </style>
     </Layout >
