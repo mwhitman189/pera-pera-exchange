@@ -1,4 +1,5 @@
 import Layout from '../components/layout'
+import GlobalStyle from '../styles/globalStyles'
 import '../styles/global.css'
 import theme from '../styles/theme'
 
@@ -6,6 +7,7 @@ import theme from '../styles/theme'
 function App({ Component, pageProps }) {
   return (
     <Layout>
+      <GlobalStyle />
       <Component {...pageProps} />
       <style jsx global>{`
         body {
