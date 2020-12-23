@@ -11,7 +11,7 @@ export default function About() {
             </Head>
 
             <h1>Level up your language skills with Pera Pera</h1>
-            <Link href="/"><a>Home</a></Link>
+            <Link href="/" as="/"><a>Home</a></Link>
         </>
     )
 }

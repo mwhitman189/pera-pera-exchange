@@ -1,26 +1,37 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+import styled from 'styled-components'
 import theme from '../styles/theme'
+
+const Container = styled.div`
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+`
+
+const MainContent = styled.div`
+  font-size: 1rem;
+  color: ${theme.ltColors.text}
+`
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <Container>
       <Head>
         <title>Pera Pera Exchange | Level up your language ability!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <MainContent>
+        <h1>
           Welcome to <Link href="/"><a>Pera Pera Exchange!</a></Link>
         </h1>
 
-        <p className={styles.description}>
+        <p>
           Get started by{' '}
-          <Link href="/users/signup"><a className="link">creating a profile</a></Link>
+          <Link href="/users/signup" as="/users/signup"><a className="link">creating a profile</a></Link>
         </p>
-      </main>
-    </div>
+      </MainContent>
+    </Container>
   )
 }
