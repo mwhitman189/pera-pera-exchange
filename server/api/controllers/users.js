@@ -190,9 +190,9 @@ exports.users_get_all = (req, res, next) => {
     User.find()
         .select('-__v -password')
         .exec()
-        .then(user => {
+        .then(users => {
             res.status(200).json({
-                user: user
+                users: users
             })
         })
         .catch(err => {

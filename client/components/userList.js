@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { fetchUsers } from '../lib/api'
 import theme from '../styles/theme'
 
 
@@ -12,22 +13,20 @@ class UserList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:9000/users')
-            .then(response => response.json())
-            .then(data => {
+        fetchUsers()
+            .then(fetchedUsers => {
                 this.setState({
-                    users: data.users
+                    users: fetchedUsers
                 })
             })
-            .catch(err => {
-                this.setState({ error: err })
-            })
+            .catch(err => console.log(err))
+
     }
 
     render() {
         return (
             <div className="user-list">
-                {this.state.users.map(({username}) => {
+                {this.state.users.map(({ username }) => {
                     return (
                         <>
                             <div className="user-plate" key={username}>

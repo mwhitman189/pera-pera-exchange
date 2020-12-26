@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import Link from 'next/link'
-import BREAKPOINTS from '../styles/breakpoints'
 import theme from '../styles/theme'
 import styled from 'styled-components'
 
