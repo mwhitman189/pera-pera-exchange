@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import theme from '../styles/theme'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -6,10 +7,13 @@ const GlobalStyle = createGlobalStyle`
         margin: 10rem;
         margin: 0;
         padding: 0;
-        background-color: green
+        background-color: ${theme.ltColors.background};
+        color: ${theme.ltColors.text};
+        fontFamily: Lato-Regular,sans-serif;
     }
 
     a {
+        color: inherit;
         cursor: pointer;
     }
 `

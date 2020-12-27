@@ -11,7 +11,15 @@ const Container = styled.div`
 
 const MainContent = styled.div`
   font-size: 1rem;
-  color: ${theme.ltColors.text}
+`
+
+const CallToAction = styled.div`
+  color: ${theme.ltColors.text};
+  font-weight: 900;
+`
+
+const SignupLink = styled.a`
+  font-style: italic;
 `
 
 export default function Home() {
@@ -27,10 +35,10 @@ export default function Home() {
           Welcome to <Link href="/"><a>Pera Pera Exchange!</a></Link>
         </h1>
 
-        <p>
+        <CallToAction>
           Get started by{' '}
-          <Link href="/users/signup" as="/users/signup"><a className="link">creating a profile</a></Link>
-        </p>
+          <Link href="/users/signup" as="/users/signup"><SignupLink>creating a profile</SignupLink></Link>
+        </CallToAction>
       </MainContent>
     </Container>
   )

@@ -5,8 +5,8 @@ import theme from '../../styles/theme'
 
 
 const UserPlate = styled.div`
-    color: ${theme.dtColors.text};
-    background-color: ${theme.ltColors.link};
+    color: ${theme.ltColors.text};
+    background-color: ${theme.ltColors.background};
     min-height: 40px;
     padding: 10px;
     border-radius: 5px;
