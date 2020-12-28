@@ -98,6 +98,35 @@ exports.sentences_get_one = (req, res, next) => {
         })
 }
 
+exports.sentences_get_recent_winner = (req, res, next) => {
+    const now = new Date()
+    const yesterday = new Date(now)
+    yesterday.setDate(yesterday.getDate() - 1)
+
+    Sentence.find({ createdAt: { $gte: yesterday, $lt: new Date(now) } }).limit(1)
+        .select('-__v')
+        .exec()
+        .then(sentence => {
+            if (!sentence) {
+                return res.status(404).json({
+                    msg: "Sentence was not found"
+                })
+            }
+            res.status(200).json({
+                sentence: sentence,
+                request: {
+                    type: 'GET',
+                    url: SENTENCES_URL
+                }
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+            })
+        })
+}
+
 exports.sentences_delete = (req, res, next) => {
     Sentence.remove({ _id: req.params.sentenceId })
         .exec()

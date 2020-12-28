@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         background-color: ${theme.ltColors.background};
         color: ${theme.ltColors.text};
-        fontFamily: Lato-Regular,sans-serif;
+        font-family: ${theme.fontFamily.sansSerif};
     }
 
     a {
