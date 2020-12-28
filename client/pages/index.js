@@ -13,7 +13,7 @@ const MainContent = styled.div`
   font-size: 1rem;
 `
 
-const WinningSentence = styled.div`
+const WinningSentences = styled.div`
   font-weight: bold;
     font-size: 26px;
   & p {
@@ -45,10 +45,11 @@ export default function Home({ data }) {
           Welcome to <Link href="/"><a>Pera Pera Exchange!</a></Link>
         </h1>
 
-        <WinningSentence>
+        <WinningSentences>
           {/* Add winning sentence */}
           {data.sentence}
-        </WinningSentence>
+          <p>{data.winningCategory}</p>
+        </WinningSentences>
 
         <CallToAction>
           Get started by{' '}
@@ -62,7 +63,7 @@ export default function Home({ data }) {
 export async function getServerSideProps() {
   const res = await fetch(`http://localhost:9000/sentences/recent`)
   const rawData = await res.json()
-  const data = rawData.sentence[ 0 ]
+  const data = rawData.sentence ? rawData.sentence : rawData.msg
 
   return { props: { data } }
 }
