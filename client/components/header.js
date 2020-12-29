@@ -10,7 +10,6 @@ const HeaderContainer = styled.div`
     width: auto;
     height: 62px;
     padding: 0 36px;
-    border-bottom: 1px solid ${theme.ltColors.border};
 `
 
 const Nav = styled.nav`

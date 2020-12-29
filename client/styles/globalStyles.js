@@ -13,8 +13,17 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        color: inherit;
+        text-decoration: none;
+        color: ${theme.ltColors.text};;
         cursor: pointer;
+        margin: 0 4px;
+        text-shadow: ${theme.shadows.defined};
+        transition: .1s;
+      
+        &:hover {
+          text-shadow: none;
+          color: ${theme.ltColors.weakText};
+        }
     }
 `
 export default GlobalStyle

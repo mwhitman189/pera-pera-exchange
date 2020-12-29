@@ -6,7 +6,6 @@ import theme from '../styles/theme'
 const Container = styled.div`
   width: 100%;
   margin: 0;
-  padding: 2rem;
 `
 
 const MainContent = styled.div`
@@ -15,19 +14,30 @@ const MainContent = styled.div`
 
 const WinningSentences = styled.div`
   font-weight: bold;
-    font-size: 26px;
-  & p {
-    font-size: 18px;
-  }
+  font-size: 26px;
+  font-style: italic;
+  margin: 1rem;
+`
+
+const SentenceData = styled.div`
+  font-size: 14px;
+  opacity: .8;
+  font-weight: 500;
+  margin-left: 1rem;
 `
 
 const CallToAction = styled.div`
   color: ${theme.ltColors.text};
   font-weight: 900;
+  font-size: 20px;
 `
 
-const SignupLink = styled.a`
+const AnchorTag = styled.a`
   font-style: italic;
+`
+
+const CallToLogin = styled.div`
+  font-size: 16px;
 `
 
 export default function Home({ data }) {
@@ -47,13 +57,21 @@ export default function Home({ data }) {
 
         <WinningSentences>
           {/* Add winning sentence */}
-          {data.sentence}
-          <p>{data.winningCategory}</p>
+          "{data.sentence}"
+          <SentenceData>~ {data.winningCategory}</SentenceData>
         </WinningSentences>
 
         <CallToAction>
-          Get started by{' '}
-          <Link href="/users/signup" as="/users/signup"><SignupLink>creating a profile</SignupLink></Link>
+          <Link href="/users/signup" as="/users/signup">
+            <AnchorTag>Get started</AnchorTag>
+          </Link>
+          {" "}by creating a profile
+          <CallToLogin>
+            Already have an account?
+          <Link href="/users/login" as="/users/login">
+              <AnchorTag>{" "}Sign In</AnchorTag>
+            </Link>
+          </CallToLogin>
         </CallToAction>
       </MainContent>
     </Container>

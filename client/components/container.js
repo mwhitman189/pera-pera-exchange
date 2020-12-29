@@ -4,7 +4,7 @@ export default function Container({ children }) {
             <div className="container">{children}</div>
 
             <style jsx>{`
-                padding: 10px;
+                margin: 3rem;
             `}
             </style>
         </>
