@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styled from 'styled-components'
 import theme from '../styles/theme'
+import breakpoints from '../styles/breakpoints'
 
 const Container = styled.div`
   width: 100%;
@@ -10,6 +11,17 @@ const Container = styled.div`
 
 const MainContent = styled.div`
   font-size: 1rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1rem;
+
+  @media (min-width: ${breakpoints.md}) {
+    margin: 0 4rem;
+  }
+`
+
+const Headline = styled.h1`
+
 `
 
 const WinningSentences = styled.div`
@@ -51,9 +63,9 @@ export default function Home({ data }) {
       </Head>
 
       <MainContent>
-        <h1>
+        <Headline>
           Welcome to <Link href="/"><a>Pera Pera Exchange!</a></Link>
-        </h1>
+        </Headline>
 
         <WinningSentences>
           {/* Add winning sentence */}
