@@ -103,7 +103,7 @@ exports.sentences_get_recent_winner = (req, res, next) => {
     const yesterday = new Date(now)
     yesterday.setDate(yesterday.getDate() - 1)
 
-    Sentence.findOne({ createdAt: { $gte: yesterday, $lt: new Date(now) }, winningCategory: { $ne: null } }).limit(1)
+    Sentence.findOne({ winningCategory: { $ne: null } }).sort({ createdAt: -1 }).limit(1)
         .select('-__v')
         .exec()
         .then(sentence => {
