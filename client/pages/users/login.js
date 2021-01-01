@@ -1,31 +1,31 @@
-import { Component } from 'react'
-import Head from 'next/head'
-import theme from '../../styles/theme'
-import checkIfExpired from '../../utils/countdown'
-import jwt_decode from "jwt-decode"
+import { Component } from 'react';
+import Head from 'next/head';
+import theme from '../../styles/theme';
+import checkIfExpired from '../../utils/countdown';
+import jwt_decode from "jwt-decode";
 
 
 class Login extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             email: "",
             password: "",
             authToken: "",
-        }
-        this.handleInputChange = this.handleInputChange.bind(this)
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange = (event) => {
-        const target = event.target
-        const value = target.value
-        const name = target.name
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
 
-        this.setState({ [ name ]: value })
-    }
+        this.setState({ [ name ]: value });
+    };
 
     handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         fetch('http://localhost:9000/users/login', {
             method: 'POST',
@@ -39,16 +39,16 @@ class Login extends Component {
         })
             .then(response => response.json())
             .then(data => {
-                const decodedToken = jwt_decode(data.accessToken)
-                checkIfExpired(decodedToken.expiresIn)
+                const decodedToken = jwt_decode(data.accessToken);
+                checkIfExpired(decodedToken.expiresIn);
                 return this.setState({
                     authToken: data.accessToken,
-                })
+                });
             })
             .catch(err => {
-                console.log(err)
-            })
-    }
+                console.log(err);
+            });
+    };
 
     render() {
         return (
@@ -87,8 +87,8 @@ class Login extends Component {
                 </form>
                 <style jsx>{`
                     .login {
-                        color: ${theme.dtColors.text};
-                        background: ${theme.ltColors.link};
+                        color: ${theme.ltColors.text};
+                        background: ${theme.ltColors.background};
                         min-height: 300px;
                         height: 50%;
                         width: 96%;
@@ -97,7 +97,7 @@ class Login extends Component {
                     }
                 `}</style>
             </div>
-        )
+        );
     }
 }
-export default Login
+export default Login;

@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import theme from '../styles/theme'
+import Head from 'next/head';
+import theme from '../../styles/theme';
 
 
 export default function Profile(props) {
-    const { username } = props
+    const { username } = props;
 
     return (
         <>
@@ -13,5 +13,5 @@ export default function Profile(props) {
 
             <h1>{username}'s Profile</h1>
         </>
-    )
+    );
 }

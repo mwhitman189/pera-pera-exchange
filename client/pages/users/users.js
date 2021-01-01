@@ -1,7 +1,7 @@
-import React from 'react'
-import Head from 'next/head'
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import React from 'react';
+import Head from 'next/head';
+import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 
 const UserPlate = styled.div`
@@ -16,7 +16,7 @@ const UserPlate = styled.div`
         background-color: ${theme.ltColors.linkHover};
         box-shadow: ${theme.shadows.subtle};
     }
-`
+`;
 
 function Users({ data }) {
     return (
@@ -32,18 +32,18 @@ function Users({ data }) {
                         <UserPlate key={username}>
                             <div className="user-name username">{username}</div>
                         </UserPlate>
-                    )
+                    );
                 })}
             </div>
         </>
-    )
+    );
 }
 
 export async function getServerSideProps() {
-    const res = await fetch(`http://localhost:9000/users`)
-    const data = await res.json()
+    const res = await fetch(`http://localhost:9000/users`);
+    const data = await res.json();
 
-    return { props: { data } }
+    return { props: { data } };
 }
 
-export default Users
+export default Users;
