@@ -28,7 +28,7 @@ const languagePointSchema = mongoose.Schema({
         ref: 'User',
         required: true,
         trim: true
-    }
-})
+    },
+}, { timestamps: true })
 
 module.exports = mongoose.model('LanguagePoint', languagePointSchema)

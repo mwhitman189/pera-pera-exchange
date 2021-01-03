@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema({
     rank: {
         type: Number,
         trim: true
-    }
-})
+    },
+}, { timestamps: true })
 
 module.exports = mongoose.model('User', userSchema)

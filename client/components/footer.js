@@ -1,25 +1,21 @@
 import styled from 'styled-components'
+import theme from '../styles/theme'
 
 
-const Container = styled.footer`
+const Container = styled.div`
+    grid-area: footer;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    border-top: 1px solid #eaeaea;
+    border-top: 3px solid ${theme.ltColors.text};
     width: 100%;
     height: 100px;
 `
 
-const Content = styled.div`
-
-`
-
-export default function Footer() {
+export default function Footer({ className }) {
     return (
-        <Container>
-            <Content>
-                © {new Date().getFullYear()} Pera Pera Exchange
-            </Content>
+        <Container className={className}>
+            © {new Date().getFullYear()} Pera Pera Exchange
         </Container>
     )
 }
